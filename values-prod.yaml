@@ -59,14 +59,14 @@ ingress:
             pathType: Prefix
             backend:
               service:
-                name: pedidos-app-prod-backend
+                name: pedido-app-prod-backend
                 port:
                   number: 8000
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: pedidos-app-prod-frontend
+                name: pedido-app-prod-frontend
                 port:
                   number: 8080
   tls: []

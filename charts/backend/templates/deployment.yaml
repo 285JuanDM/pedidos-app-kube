@@ -14,44 +14,20 @@ spec:
       labels:
         {{- include "backend.selectorLabels" . | nindent 8 }}
     spec:
-        env:
-          - name: DB_HOST
-            valueFrom:
-              configMapKeyRef:
-                name: {{ .Values.configMapName }}
-                key: DB_HOST
-          - name: DB_PORT
-            valueFrom:
-              configMapKeyRef:
-                name: {{ .Values.configMapName }}
-                key: DB_PORT
-      containers:
-      - name: backend
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
-        ports:
-        - containerPort: {{ .Values.containerPort }}
-        envFrom:
-        - configMapRef:
-            name: {{ .Values.configMapName }}
-        - secretRef:
-            name: {{ .Values.secretName }}
-        resources:
-          limits:
-            cpu: {{ .Values.resources.limits.cpu }}
-            memory: {{ .Values.resources.limits.memory }}
-          requests:
-            cpu: {{ .Values.resources.requests.cpu }}
-            memory: {{ .Values.resources.requests.memory }}
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: {{ .Values.containerPort }}
-          initialDelaySeconds: 5
-          periodSeconds: 5
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: {{ .Values.containerPort }}
-          initialDelaySeconds: 15
-          periodSeconds: 20
+        containers:
+          - name: backend
+            image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+            imagePullPolicy: {{ .Values.image.pullPolicy }}
+            ports:
+              - containerPort: {{ .Values.containerPort }}
+            env:
+              - name: DB_HOST
+                valueFrom:
+                  configMapKeyRef:
+                    name: {{ .Values.configMapName }}
+                    key: DB_HOST
+              - name: DB_PORT
+                valueFrom:
+                  configMapKeyRef:
+                    name: {{ .Values.configMapName }}
+                    key: DB_PORT
