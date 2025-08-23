@@ -1,5 +1,7 @@
 backend:
   replicaCount: 2
+  secretName: db-secret-prod
+  configMapName: backend-db-config-prod
   resources:
     limits:
       cpu: "1"
@@ -7,7 +9,6 @@ backend:
     requests:
       cpu: "500m"
       memory: "512Mi"
-  configMapName: backend-db-config-prod
 
 frontend:
   replicaCount: 2
@@ -24,7 +25,7 @@ frontend:
 
 db:
   auth:
-    existingSecret: db-secret
+    existingSecret: db-secret-prod
     # enablePostgresUser: true
     config:
       existingConfigMap: backend-db-config-prod

@@ -43,32 +43,11 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: {{ .Values.containerPort }}
-        env:
-        - name: DB_HOST
-          valueFrom:
-            configMapKeyRef:
-              name: {{ .Values.configMapName }}
-              key: DB_HOST
-        - name: DB_PORT
-          valueFrom:
-            configMapKeyRef:
-              name: {{ .Values.configMapName }}
-              key: DB_PORT
-        - name: DB_USER
-          valueFrom:
-            secretKeyRef:
-              name: backend-db-secret
-              key: DB_USER
-        - name: DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: backend-db-secret
-              key: DB_PASSWORD
-        - name: DB_NAME
-          valueFrom:
-            secretKeyRef:
-              name: backend-db-secret
-              key: DB_NAME
+        envFrom:
+        - configMapRef:
+            name: {{ .Values.configMapName }}
+        - secretRef:
+            name: {{ .Values.secretName }}
         resources:
           limits:
             cpu: {{ .Values.resources.limits.cpu }}
