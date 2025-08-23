@@ -50,21 +50,22 @@ autoscaling:
   enabled: false  # en dev normalmente no escalamos
 
 ingress:
+  enabled: true
   rules:
-    - http:
+    - host: dev.example.com
+      http:
         paths:
           - path: /api
             pathType: Prefix
             backend:
               service:
-                name: pedidos-app-dev-backend
+                name: pedido-app-dev-backend
                 port:
                   number: 8000
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: pedidos-app-dev-frontend
+                name: pedido-app-dev-frontend
                 port:
                   number: 8080
-  tls: []
