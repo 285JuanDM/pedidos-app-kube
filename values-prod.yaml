@@ -1,0 +1,71 @@
+backend:
+  replicaCount: 2
+  resources:
+    limits:
+      cpu: "1"
+      memory: "1Gi"
+    requests:
+      cpu: "500m"
+      memory: "512Mi"
+  configMapName: backend-db-config-prod
+
+frontend:
+  replicaCount: 2
+  service:
+    type: ClusterIP
+    port: 8080
+  resources:
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
+    requests:
+      cpu: "250m"
+      memory: "256Mi"
+
+db:
+  auth:
+    existingSecret: db-secret
+    # enablePostgresUser: true
+    config:
+      existingConfigMap: backend-db-config-prod
+  primary:
+    persistence:
+      enabled: true
+      storageClass: "do-block-storage"
+      accessModes:
+        - ReadWriteOnce
+      size: 20Gi
+    resources:
+      limits:
+        cpu: "1"
+        memory: "1Gi"
+      requests:
+        cpu: "500m"
+        memory: "512Mi"
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 70
+  targetMemoryUtilizationPercentage: 80
+
+ingress:
+  rules:
+    - http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: pedidos-app-prod-backend
+                port:
+                  number: 8000
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: pedidos-app-prod-frontend
+                port:
+                  number: 8080
+  tls: []

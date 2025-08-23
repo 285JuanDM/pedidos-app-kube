@@ -1,0 +1,15 @@
+backend:
+  image:
+    repository: 285juandm/backend
+    tag: "1.0.0"
+
+frontend:
+  image:
+    repository: 285juandm/frontend
+    tag: "1.0.1"
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    kubernetes.io/ingress.class: nginx

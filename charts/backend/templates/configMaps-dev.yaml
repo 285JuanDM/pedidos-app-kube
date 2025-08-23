@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-db-config-dev
+  namespace: dev
+data:
+  DB_HOST: pedidos-app-dev-db
+  DB_PORT: "5432"

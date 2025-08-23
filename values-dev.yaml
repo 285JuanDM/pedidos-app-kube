@@ -1,0 +1,63 @@
+backend:
+  replicaCount: 1
+  resources:
+    limits:
+      cpu: "500m"
+      memory: "512Mi"
+    requests:
+      cpu: "250m"
+      memory: "256Mi"
+  configMapName: backend-db-config-dev
+
+frontend:
+  replicaCount: 1
+  service:
+    type: ClusterIP
+    port: 8080
+  resources:
+    limits:
+      cpu: "300m"
+      memory: "256Mi"
+    requests:
+      cpu: "150m"
+      memory: "128Mi"
+
+db:
+  auth:
+    existingSecret: db-secret
+    # enablePostgresUser: true
+    config:
+      existingConfigMap: backend-db-config-dev
+  primary:
+    persistence:
+      enabled: false
+    resources:
+      limits:
+        cpu: "500m"
+        memory: "512Mi"
+      requests:
+        cpu: "250m"
+        memory: "256Mi"
+
+autoscaling:
+  enabled: false  # en dev normalmente no escalamos
+
+ingress:
+  rules:
+    - http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: pedidos-app-dev-backend
+                port:
+                  number: 8000
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: pedidos-app-dev-frontend
+                port:
+                  number: 8080
+  tls: []
