@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/285JuanDM/pedidos-app-kube.git
-    targetRevision: HEAD
-    path: charts/pedido-app
+    repoURL: http://174.138.111.130:8080/
+    targetRevision: 0.1.1
+    chart: pedidos-app
     helm:
       valueFiles:
         - values-prod.yaml

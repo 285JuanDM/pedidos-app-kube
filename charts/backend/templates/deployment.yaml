@@ -14,18 +14,6 @@ spec:
       labels:
         {{- include "backend.selectorLabels" . | nindent 8 }}
     spec:
-      initContainers:
-      - name: wait-for-db
-        image: busybox
-        command:
-          - sh
-          - -c
-          - |
-            echo "Esperando a que la DB esté lista..."
-            until nc -z $DB_HOST $DB_PORT; do
-              sleep 5
-            done
-            echo "DB lista, iniciando backend"
         env:
           - name: DB_HOST
             valueFrom:
