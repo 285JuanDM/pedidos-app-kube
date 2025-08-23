@@ -8,12 +8,10 @@ appVersion: "1.16.0"
 dependencies:
   - name: backend
     version: 0.1.0
-    repository: "pedidos-app-kube/charts/backend"
-    
+    repository: "file://charts/backend"    # ✅ Correcto desde raíz
   - name: frontend
     version: 0.1.0
-    repository: "pedidos-app-kube/charts/frontend"
-
+    repository: "file://charts/frontend"   # ✅ Correcto desde raíz
   - name: postgresql
     version: 15.5.2
     repository: https://charts.bitnami.com/bitnami
