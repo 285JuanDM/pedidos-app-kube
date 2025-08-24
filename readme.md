@@ -94,4 +94,4 @@ syncPolicy:
   2. Argo CD detecta el cambio y, al hacer **Refresh** o mediante Auto-Sync, aplica la actualización.
   3. Los pods, servicios, ingress, HPAs y demás recursos de Kubernetes se actualizan automáticamente según lo definido en el chart.
 
-* Este mecanismo garantiza que cualquier cambio en el repositorio de charts se refleje en el cluster sin necesidad de ejecutar comandos `kubectl` o `helm` manualmente, permitiendo una integración continua.
+* Este mecanismo garantiza que cualquier cambio en el repositorio de charts se refleje en el cluster sin necesidad de ejecutar comandos `kubectl` o `helm` manualmente, permitiendo el despliegue continuo.
