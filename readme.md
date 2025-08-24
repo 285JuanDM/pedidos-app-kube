@@ -72,9 +72,6 @@ helm install pedido-app-prod pedidos-app/pedidos-app --namespace prod --values v
 
 # Cómo está configurado ArgoCD para sincronizar
 
-
-## Configuración de Argo CD para sincronización automática
-
 - Cada aplicación (`Application`) en Argo CD tiene activado **Auto-Sync** mediante:
 
 ```yaml
