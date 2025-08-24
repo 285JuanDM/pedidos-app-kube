@@ -2,7 +2,7 @@ apiVersion: v2
 name: pedidos-app
 description: Umbrella chart para la app de pedidos
 type: application
-version: 0.1.12
+version: 0.1.13
 appVersion: "1.16.0"
 
 dependencies:
