@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: http://174.138.111.130:8080/
-    targetRevision: 0.1.12
+    targetRevision: "*"
     chart: pedidos-app
     helm:
       valueFiles:
